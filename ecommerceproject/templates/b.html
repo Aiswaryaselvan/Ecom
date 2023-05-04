@@ -1,0 +1,89 @@
+<a href="cart_item.product.get_absolute_url"> (cart.html page,line 46)(for unserstanding)
+
+    NAVBAR
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active {% if  'shopapp' in request.path %} active {% endif %}" href="#"><i class="fa fa-home"></i> <span class="sr-only">b</span></a>
+
+      <a class="nav-item nav-link" href="{% url 'shopapp:allprodcat' %}">All Products</a>  ---
+        {% for category1 in links %}
+      <a class="nav-item nav-link"  href="{{category1.get_url}}"> .{{category1.name}}  </a>
+        {% endfor %}
+
+      {% if item_count > 0 %}
+      <a class="nav-item nav-link" href="{% url 'cartapp:cart_detail' %}"><i class="fa fa-shopping-cart"></i>({{item_count}})</a>
+      {% endif %}
+
+      <form class="d-flex" action="{% url 'searchapp:searchresult' %}" method="get">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" name="q" placeholder="search" aria-label="search">
+        <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+
+    </div>
+  </div>
+</nav>
+
+
+    PUT THIS
+    <div class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <a class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home </a>
+        </a>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+<a class="dropdown">
+		<a class="nav-link" href="{% url 'shopapp:allprodcat' %}">All Products </a>
+	<ul class="dropdown-content">
+          {% for category1 in links %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{category1.get_url}}">{{category1.name}}</a><br>
+			{% endfor %}
+		</ul>
+</a>
+
+
+        <a class="nav-item">
+            {% if item_count > 0 %}
+          <a class="nav-link disabled" href="{% url 'cartapp:cart_detail' %}" tabindex="-1" aria-disabled="true">cart ({{item_count}})</a>
+          {% endif %}
+        </a>
+      </ul>
+
+
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <form class="d-flex"  action="{% url 'searchapp:searchresult' %}" method="get">
+            {% csrf_token %}
+        <input class="form-control me-2" type="search" name="q" placeholder="search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">search</button>
+      </form>
+
+
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+    REFE
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" href="{% url 'shopapp:allprodcat' %}" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+{% for category1 in links %}
+    <li><a class="dropdown-item" href="{{category1.get_url}}">{{category1.name}}</a></li>
+{% endfor %}
+  </ul>
+</div>
+
